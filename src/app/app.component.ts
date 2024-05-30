@@ -6,13 +6,15 @@ import { NavComponent } from "./nav/nav.component";
 import { User } from './Model/user';
 import { AccountService } from './Services/account.service';
 import { HomeComponent } from './home/home.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 @Component({
     selector: 'app-root',
     standalone: true,
     templateUrl: './app.component.html',
     styleUrl: './app.component.css',
-    imports: [CommonModule, NavComponent, HomeComponent, RouterOutlet]
+    imports: [CommonModule, NavComponent
+      , HomeComponent, RouterOutlet, NgxSpinnerModule]
 })
 export class AppComponent implements OnInit {
   title = 'Dating App';

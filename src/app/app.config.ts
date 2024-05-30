@@ -1,4 +1,4 @@
-import { ApplicationConfig } from '@angular/core';
+import { ApplicationConfig, importProvidersFrom } from '@angular/core';
 import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
@@ -7,16 +7,21 @@ import { provideAnimations } from "@angular/platform-browser/animations"
 import { provideToastr } from 'ngx-toastr';
 import { errorInterceptor } from './Interceptors/error.interceptor';
 import { jwtInterceptor } from './Interceptors/jwt.interceptor';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { loadingInterceptor } from './Interceptors/loading.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
-    provideHttpClient( withInterceptors([errorInterceptor, jwtInterceptor])),
+    provideHttpClient( withInterceptors([errorInterceptor, jwtInterceptor, loadingInterceptor])),
     provideAnimations(),
     provideToastr({
       timeOut: 10000,
       positionClass: 'toast-bottom-right',
       preventDuplicates: true,
-    })
+    }),
+    importProvidersFrom(NgxSpinnerModule.forRoot({
+      type: "line-scale-party"
+    }))
   ]
 };
