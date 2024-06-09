@@ -25,6 +25,11 @@ export class PhotoEditorComponent {
 
   PhotoUpload(event: Photo){
     this.member()?.photos.push(event);
+    if (event.isMain && this.user) {
+      this.member().photoUrl = event.url;
+      this.user.photoUrl = event.url;
+      this.accountService.setCurrentUser(this.user);
+    }
   }
 
   setMainPhoto(photo: Photo){

@@ -1,13 +1,66 @@
-<form #RegisterForm = "ngForm" (ngSubmit) = "register()">
+<form [formGroup]="registerForm" (ngSubmit)="registerForm.valid && register()">
     <h2 class="text-center text-primary">Sign Up</h2>
     <hr>
     <div class="mb-3">
-        <input type="text" class="form-control" name="Username" [(ngModel)]="model.Username" placeholder="Username">
-    </div><div class="mb-3">
-        <input type="password" class="form-control" name="Password" [(ngModel)]="model.Password" placeholder="Password">
+        <label style="margin-right: 10px;">I am a:</label>
+        <label class="form-check-label">
+            <input type="radio" class="form-check-input" value="male" formControlName="Gender"> Male
+        </label>
+        <label class="form-check-label">
+            <input type="radio" class="form-check-input ms-3" value="female" formControlName="Gender"> Female
+        </label>
+    </div>
+    <div class="mb-3">
+        <input type="text" class="form-control"
+            [class.is-invalid]="control('Username').errors && control('Username').touched" formControlName="Username"
+            placeholder="Username">
+        @if (control('Username').hasError('required')) {<div class="invalid-feedback">Please enter the Username</div>}
+    </div>
+    <div class="mb-3">
+        <input type="text" class="form-control"
+            [class.is-invalid]="control('KnownAs').errors && control('KnownAs').touched" formControlName="KnownAs"
+            placeholder="Known as">
+        @if (control('KnownAs').hasError('required')) {<div class="invalid-feedback">Please enter the Known as</div>}
+    </div>
+    <div class="mb-3">
+        <input type="text" class="form-control" bsDatepicker [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD',containerClass:'theme-red' }"
+            [class.is-invalid]="control('DateofBirth').errors && control('DateofBirth').touched"
+            formControlName="DateofBirth" placeholder="Date of Birth">
+        @if (control('DateofBirth').hasError('required')) {<div class="invalid-feedback">Please enter the Date of Birth
+        </div>}
+    </div>
+    <div class="mb-3">
+        <input type="text" class="form-control" [class.is-invalid]="control('City').errors && control('City').touched"
+            formControlName="City" placeholder="City">
+        @if (control('City').hasError('required')) {<div class="invalid-feedback">Please enter the City</div>}
+    </div>
+    <div class="mb-3">
+        <input type="text" class="form-control"
+            [class.is-invalid]="control('Country').errors && control('Country').touched" formControlName="Country"
+            placeholder="Country">
+        @if (control('Country').hasError('required')) {<div class="invalid-feedback">Please enter the Country</div>}
+    </div>
+    <div class="mb-3">
+        <input type="password" class="form-control"
+            [class.is-invalid]="control('Password').errors && control('Password').touched" formControlName="Password"
+            placeholder="Password">
+        @if (control('Password').hasError('required')) {<div class="invalid-feedback">Please enter the Password</div>}
+        @if (control('Password').hasError('minlength')) {<div class="invalid-feedback">Password at least 4 character
+        </div>}
+        @if (control('Password').hasError('maxlength')) {<div class="invalid-feedback">Password at most 12 character
+        </div>}
+
+    </div>
+    <div class="mb-3">
+        <input type="password" class="form-control"
+            [class.is-invalid]="control('ConfirmPassword').errors && control('ConfirmPassword').touched"
+            formControlName="ConfirmPassword" placeholder="Confirm Password">
+        @if (control('ConfirmPassword').hasError('required')) {<div class="invalid-feedback">Please enter the Confirm
+            Password</div>}
+        @if (control('ConfirmPassword').hasError('noMatch')) {<div class="invalid-feedback">Password not match</div>}
     </div>
     <div class="text-center">
-        <button class="btn btn-success me-3" type="submit">Register</button>
+        <button class="btn btn-success me-3" [disabled]="!registerForm.valid" type="submit">Register</button>
         <button class="btn btn-default" type="button" (click)="cancel()">Cancel</button>
     </div>
 </form>
