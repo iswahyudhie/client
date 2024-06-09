@@ -1,0 +1,48 @@
+<form class="upload-form">
+    <h1>Upload File</h1>
+  
+    <label
+      for="file"
+      (dragover)="handleDragOver($event)"
+      (drop)="handleDrop($event)">
+      <i class="ph ph-upload"></i>  
+      <span>
+        Drag & drop or
+        <span>browse</span>
+        your files
+      </span>
+    </label>
+  
+    <input
+      id="file"
+      type="file"
+      name="file"
+      (change)="onFilesSelected($event)"
+      multiple
+    />
+  
+    <div class="result" [style.display]="outputBoxVisible ? 'flex' : 'none'">
+      @for (fileInfo of filesInfo; track $index) {
+        <div class="file-info">
+          <i class="ph ph-file"></i>
+          <div class="file-details">
+            <span class="file-name">{{ fileInfo.name }}</span>
+            <div class="progress-bar">
+              <div class="progress" [style.width]="fileInfo.progress"></div>
+            </div>
+            <span class="file-size">{{ fileInfo.size }}</span>
+          </div>
+    
+          <div class="upload-result" [style.display]="fileInfo.status ? 'flex' : 'none'">
+            <span>{{ fileInfo.status }}</span>
+            @if (fileInfo.status === 'Uploaded') {
+              <i class="ph ph-check-circle"></i>
+            } @else {
+              <i class="ph ph-x-circle"></i>
+            }
+          </div>
+        </div>
+      }      
+    </div>
+  </form>
+  
