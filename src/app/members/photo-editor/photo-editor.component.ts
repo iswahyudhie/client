@@ -20,7 +20,7 @@ export class PhotoEditorComponent {
   user: User | null = null;
 
   constructor(private memberService: MembersService, private accountService: AccountService){
-    accountService.currentUser$.pipe(take(1)).subscribe(usr => this.user = usr)
+    this.user = accountService.currentUser();
   }
 
   PhotoUpload(event: Photo){

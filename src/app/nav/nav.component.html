@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-primary">
     <div class="container">
         <a class="navbar-brand" routerLink="/" routerLinkActive="active">Dating App</a>
-        @if (accountService.currentUser$|async; as user) {
+        @if (accountService.currentUser(); as user) {
         <ul class="navbar-nav me-auto mb-2 mb-md-0">
             <li class="nav-item">
                 <a class="nav-link" routerLink="/members" routerLinkActive="active">Matches</a>
@@ -15,14 +15,14 @@
         </ul>
         <div class="dropdown" dropdown>
             <img src="{{user.photoUrl || './assets/user.png'}}" alt="user photo">
-            <a class="dropdown-toggle text-light text-decoration-none ms-2" dropdownToggle >Welcome {{user.username | titlecase}}</a>
+            <a class="dropdown-toggle text-light text-decoration-none ms-2" dropdownToggle >Welcome {{user.knownAs}}</a>
             <div class="dropdown-menu" *dropdownMenu>
                 <a class="dropdown-item" routerLink="/member/edit">Edit Profile</a>
                 <a class="dropdown-item" (click)="logout()">Logout</a>
             </div>
         </div>
         }
-        @if (!((accountService.currentUser$|async))) {
+        @if (!((accountService.currentUser()))) {
         <form #LoginForm="ngForm" (ngSubmit)="login()" class="d-flex">
             <input name="Username" [(ngModel)]="model.Username" class="form-control me-2" type="text"
                 placeholder="Username">
