@@ -48,7 +48,7 @@
 
 @if (memberService.paginatedResult()?.pagination) {
 <div class="d-flex justify-content-center">
-    <pagination [boundaryLinks]="true" [totalItems]="77" 
+    <pagination [boundaryLinks]="true"
         [totalItems]="memberService.paginatedResult()?.pagination!.totalItems"
         [itemsPerPage]="memberService.paginatedResult()?.pagination!.itemsPerPage"
         (pageChanged)="pageChanged($event)"
