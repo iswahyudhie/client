@@ -10,6 +10,7 @@ import { jwtInterceptor } from './Interceptors/jwt.interceptor';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { loadingInterceptor } from './Interceptors/loading.interceptor';
 import { TimeagoModule } from 'ngx-timeago';
+import {ModalModule} from 'ngx-bootstrap/modal';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -23,6 +24,6 @@ export const appConfig: ApplicationConfig = {
     }),
     importProvidersFrom(NgxSpinnerModule.forRoot({
       type: "line-scale-party"
-    }), TimeagoModule.forRoot())
+    }), TimeagoModule.forRoot(), ModalModule.forRoot())
   ]
 };
